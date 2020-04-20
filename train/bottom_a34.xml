@@ -1,7 +1,7 @@
 <annotation>
 	<folder>train</folder>
 	<filename>bottom_a34.jpg</filename>
-	<path>/Users/harini/Documents/ChemE599/Domino_App_Project/images_pips 2/train/bottom_a34.jpg</path>
+	<path>/Users/harini/Documents/ChemE599/Domino_App_Project/train/bottom_a34.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
@@ -192,66 +192,6 @@
 		</bndbox>
 	</object>
 	<object>
-		<name>C</name>
-		<pose>Unspecified</pose>
-		<truncated>1</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>1</xmin>
-			<ymin>59</ymin>
-			<xmax>54</xmax>
-			<ymax>129</ymax>
-		</bndbox>
-	</object>
-	<object>
-		<name>C</name>
-		<pose>Unspecified</pose>
-		<truncated>1</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>1</xmin>
-			<ymin>111</ymin>
-			<xmax>24</xmax>
-			<ymax>201</ymax>
-		</bndbox>
-	</object>
-	<object>
-		<name>D</name>
-		<pose>Unspecified</pose>
-		<truncated>0</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>518</xmin>
-			<ymin>34</ymin>
-			<xmax>581</xmax>
-			<ymax>103</ymax>
-		</bndbox>
-	</object>
-	<object>
-		<name>D</name>
-		<pose>Unspecified</pose>
-		<truncated>0</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>542</xmin>
-			<ymin>85</ymin>
-			<xmax>598</xmax>
-			<ymax>167</ymax>
-		</bndbox>
-	</object>
-	<object>
-		<name>D</name>
-		<pose>Unspecified</pose>
-		<truncated>0</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>564</xmin>
-			<ymin>145</ymin>
-			<xmax>632</xmax>
-			<ymax>257</ymax>
-		</bndbox>
-	</object>
-	<object>
 		<name>domino</name>
 		<pose>Unspecified</pose>
 		<truncated>1</truncated>
@@ -309,42 +249,6 @@
 			<ymin>295</ymin>
 			<xmax>605</xmax>
 			<ymax>363</ymax>
-		</bndbox>
-	</object>
-	<object>
-		<name>F</name>
-		<pose>Unspecified</pose>
-		<truncated>1</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>228</xmin>
-			<ymin>1</ymin>
-			<xmax>305</xmax>
-			<ymax>33</ymax>
-		</bndbox>
-	</object>
-	<object>
-		<name>F</name>
-		<pose>Unspecified</pose>
-		<truncated>1</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>311</xmin>
-			<ymin>1</ymin>
-			<xmax>380</xmax>
-			<ymax>38</ymax>
-		</bndbox>
-	</object>
-	<object>
-		<name>F</name>
-		<pose>Unspecified</pose>
-		<truncated>1</truncated>
-		<difficult>0</difficult>
-		<bndbox>
-			<xmin>390</xmin>
-			<ymin>1</ymin>
-			<xmax>462</xmax>
-			<ymax>42</ymax>
 		</bndbox>
 	</object>
 	<object>
