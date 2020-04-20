@@ -1,7 +1,7 @@
 <annotation>
 	<folder>train</folder>
 	<filename>bottom_a28.jpg</filename>
-	<path>/Users/harini/Documents/ChemE599/Domino_App_Project/train/bottom_a28.jpg</path>
+	<path>C:\Users\Zane\Desktop\Domino_App_Project\train\bottom_a28.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
@@ -509,8 +509,8 @@
 		<truncated>0</truncated>
 		<difficult>0</difficult>
 		<bndbox>
-			<xmin>584</xmin>
-			<ymin>313</ymin>
+			<xmin>571</xmin>
+			<ymin>307</ymin>
 			<xmax>620</xmax>
 			<ymax>345</ymax>
 		</bndbox>
@@ -929,8 +929,8 @@
 		<truncated>0</truncated>
 		<difficult>0</difficult>
 		<bndbox>
-			<xmin>265</xmin>
-			<ymin>169</ymin>
+			<xmin>268</xmin>
+			<ymin>170</ymin>
 			<xmax>289</xmax>
 			<ymax>183</ymax>
 		</bndbox>
@@ -1363,8 +1363,8 @@
 		<bndbox>
 			<xmin>282</xmin>
 			<ymin>68</ymin>
-			<xmax>289</xmax>
-			<ymax>76</ymax>
+			<xmax>291</xmax>
+			<ymax>78</ymax>
 		</bndbox>
 	</object>
 	<object>
@@ -1409,10 +1409,10 @@
 		<truncated>0</truncated>
 		<difficult>0</difficult>
 		<bndbox>
-			<xmin>307</xmin>
-			<ymin>55</ymin>
-			<xmax>317</xmax>
-			<ymax>69</ymax>
+			<xmin>304</xmin>
+			<ymin>56</ymin>
+			<xmax>316</xmax>
+			<ymax>66</ymax>
 		</bndbox>
 	</object>
 	<object>
@@ -1445,10 +1445,46 @@
 		<truncated>0</truncated>
 		<difficult>0</difficult>
 		<bndbox>
-			<xmin>281</xmin>
+			<xmin>283</xmin>
 			<ymin>37</ymin>
-			<xmax>298</xmax>
-			<ymax>43</ymax>
+			<xmax>295</xmax>
+			<ymax>45</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>dot</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>235</xmin>
+			<ymin>221</ymin>
+			<xmax>247</xmax>
+			<ymax>232</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>dot</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>247</xmin>
+			<ymin>221</ymin>
+			<xmax>260</xmax>
+			<ymax>233</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>dot</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>261</xmin>
+			<ymin>220</ymin>
+			<xmax>272</xmax>
+			<ymax>232</ymax>
 		</bndbox>
 	</object>
 </annotation>

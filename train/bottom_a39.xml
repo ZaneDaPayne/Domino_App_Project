@@ -1,7 +1,7 @@
 <annotation>
 	<folder>train</folder>
 	<filename>bottom_a39.jpg</filename>
-	<path>/Users/harini/Documents/ChemE599/Domino_App_Project/train/bottom_a39.jpg</path>
+	<path>C:\Users\Zane\Desktop\Domino_App_Project\train\bottom_a39.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
@@ -453,6 +453,18 @@
 			<ymin>11</ymin>
 			<xmax>336</xmax>
 			<ymax>20</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>blank</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>270</xmin>
+			<ymin>19</ymin>
+			<xmax>311</xmax>
+			<ymax>43</ymax>
 		</bndbox>
 	</object>
 </annotation>
