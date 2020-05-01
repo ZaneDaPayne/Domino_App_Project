@@ -10,7 +10,7 @@ Totaling scores after a game of dominos can be annoying and the game would be mo
 
 **Phase I: Domino dot recognition (SciKit Image and PIL)**
 
-The goal of this phase is to write a program that can detect and count dots and blank spaces for various domino arrangement. During the coding process, it is salient to account for noisy backgrounds, blurry images, cropped out dominos, colored dominos and dots, shadows, and other anomalies that may be captured by a phone camera.
+The goal of this phase is to write a program that can detect and count dots and blank spaces for various domino arrangement. During the coding process, it is important that the program includes salient features to account for noisy backgrounds, blurry images, cropped out dominos, colored dominos and dots, shadows, and other anomalies that may be captured by a phone camera.
 
 **Methods (Codes Available in Repo):
 1. Defining and drawing contours
