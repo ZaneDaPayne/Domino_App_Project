@@ -30,3 +30,4 @@ We are currently in the process of developing an app to integrate our domino det
 # Installation
 
 # Setup
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
