@@ -1,0 +1,119 @@
+<MainWindow>:
+	
+	canvas.before:
+	    Color:
+	        rgba: 1, 1, 1, 1
+	    Rectangle:
+	        pos: self.pos
+	        size: self.size
+
+	GridLayout:
+		id: camerawindow
+		cols: 1
+		pos_hint: {"top":1}
+		size_hint: 1, 0.8
+
+		canvas.before: 
+	        Color:
+	            rgba: 0, 0, 0, 1
+	        Rectangle:
+	            pos: self.pos
+	            size: self.size
+
+		Label:
+			id: view
+			text: "view"
+
+	GridLayout:
+		id: controlwindow
+		cols: 3
+		pos_hint: {"bottom":1}
+		size_hint: 1, 0.2
+
+		canvas.before:
+	        Color:
+	            rgba: 0,0,0,0.5
+	        Rectangle:
+	            pos: self.pos
+	            size: self.size
+
+	    FloatLayout:
+	    	id: leftwindow
+		    Button:
+		    	id: backbtn # Put this in a float layout in a grid layout to fix this.
+		    	 
+		    	pos_hint: {"center_x":0.5,"center_y":0.5}
+		    	size: min(self.size),min(self.size)
+		    	size_hint: None,None #This is neccessary
+		    	text: "Back"
+		    	background_color: 0,0,0,0
+
+		    	canvas.before: 
+		    		Color:
+		    			rgba: (1,0,0,0.3) if self.state=="normal" else (1,0,0,0.5)
+		    		RoundedRectangle:
+		    			size: self.size
+		    			pos: self.pos
+		    			radius: [10,]
+
+		    	on_press: 
+		    		root.ids.view.text = "Back"
+		    	on_release:
+		    		root.ids.view.text = "view"
+		    	
+
+		FloatLayout:
+			id: centerwindow
+		    Button:
+		    	id: shutterbtn
+		    	pos_hint: {"center_x":0.5, "center_y":0.5}
+		    	size: min(self.size),min(self.size)
+		    	size_hint: None,None #This is neccessary
+		    	background_color: 0,0,0,0
+
+		    	canvas.before: 
+		    		Color:
+		    			rgba: (0,0,1,0.3) if self.state=="normal" else (0,0,1,0.5)
+		    		Ellipse:
+		    			size: self.size
+		    			pos: self.pos
+		    			
+		    	text: "Capture"
+		    	on_press: 
+		    		root.ids.view.text = "Click!"
+		    	on_release: 
+		    		root.ids.view.text = "view"
+		    		
+	    FloatLayout:
+			id: rightwindow
+		    Button:
+		    	id: cyclebtn
+		    	pos_hint: {"center_x":0.5, "center_y":0.5}
+		    	size: min(self.size),min(self.size)
+		    	size_hint: None,None #This is neccessary
+		    	background_color: 0,0,0,0
+
+		    	canvas.before: 
+		    		Color:
+		    			rgba: (0.247,0.749,0.749,0.5) if self.state=="normal" else (0.247,0.749,0.749,1)
+		    		RoundedRectangle:
+		    			size: self.size
+		    			pos: self.pos
+		    			radius: [10,]
+		    			
+		    	text: "Next cam"
+		    	on_press: 
+		    		root.ids.view.text = "next cam"
+		    	on_release: 
+		    		root.ids.view.text = "view"
+
+
+	
+
+
+		
+			
+
+
+
+	
