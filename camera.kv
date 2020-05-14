@@ -1,6 +1,6 @@
 GridLayout:
 	cols: 1
-	ScreenManager:
+	Screenmanager:
 		id: screenmanager
 		MainWindow:
 			name: "main"
@@ -52,8 +52,7 @@ GridLayout:
 			    Button:
 			    	id: backbtn		    	 
 			    	pos_hint: {"center_x":0.5,"center_y":0.5}
-			    	#size: min(self.size),min(self.size)
-			    	size_hint: 0.5,0.5 #This is neccessary
+			    	size_hint: 0.5,0.5 
 			    	background_color: 0,0,0,0
 			    	on_press:
 				    	app.root.ids.screenmanager.transition.direction = 'right'
@@ -71,13 +70,13 @@ GridLayout:
 			    Button:
 			    	id: shutterbtn
 			    	pos_hint: {"center_x":0.5, "center_y":0.5}
-			    	#size: min(self.size),min(self.size)
-			    	size_hint: 0.7,0.7 #This is neccessary
+			    	size_hint: 0.7,0.7 
 			    	background_color: 0,0,0,0
 			    	
 			    	on_press: 
 			    		root.capture()
 			    	on_release: 
+			    		app.root.ids.overlay.createimg()
 			    		app.root.ids['screenmanager'].transition.direction = 'left'
 			    		app.root.ids['screenmanager'].current = 'overlay'
 			    	
@@ -97,7 +96,7 @@ GridLayout:
 			    	text: "Next cam"
 			    	pos_hint: {"center_x":0.5, "center_y":0.5}
 			    	size: self.parent.size
-			    	size_hint: 0.8,0.8#This is neccessary
+			    	size_hint: 0.8,0.8
 			    	background_color: 0,0,0,0
 			    	canvas.before: 
 			    		Color:
@@ -113,13 +112,31 @@ GridLayout:
 
 <OverlayWindow>:
 
-	FloatLayout:	
+	FloatLayout:
+		id: overlay_mainfloat	
 		canvas.before:
 		    Color:
-		        rgba: 1, 1, 1, 1
+		        rgba: 1,1,1,1
 		    Rectangle:
 		        pos: self.pos
 		        size: self.size
+
+		GridLayout:
+			cols: 1
+			id: checkwindow
+			pos_hint: {"top":1}
+			size_hint: 1,0.8
+			canvas: 
+		        Color:
+		            rgba: 0,0,0,1#this doesn't work?
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+
+			
+
+
+
     
     	GridLayout:
 			cols: 3
@@ -137,12 +154,12 @@ GridLayout:
 			    Button:
 			    	id: backbtn2		    	 
 			    	pos_hint: {"center_x":0.5,"center_y":0.5}
-			    	#size: min(self.size),min(self.size)
-			    	size_hint: 0.5,0.5 #This is neccessary
+			    	size_hint: 0.5,0.5 
 			    	background_color: 0,0,0,0
 			    	on_release:
 				    	app.root.ids.screenmanager.transition.direction = 'right'
 				    	app.root.ids.screenmanager.current = 'main'
+				    	root.removeimg()
 
 			    	Image:
 			    		source: 'backbtn_up.png' if self.parent.state=="normal" else 'backbtn_down.png'
