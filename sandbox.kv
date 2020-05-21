@@ -42,7 +42,7 @@ GridLayout:
 			size_hint: 1, 0.2
 			canvas.before:
 		        Color:
-		            rgba: 0,0,0,0.5
+		            rgba: 0,0,0,1
 		        Rectangle:
 		            pos: self.pos
 		            size: self.size
@@ -60,7 +60,7 @@ GridLayout:
 				    	app.root.ids.screenmanager.current = 'main'
 
 			    	Image:
-			    		source: 'backbtn_up.png' if self.parent.state=="normal" else 'backbtn_down.png'
+			    		source: 'backbtn_up_white.png' if self.parent.state=="normal" else 'backbtn_down_white.png'
 			    		center_x: self.parent.center_x
 			    		center_y: self.parent.center_y
 			    		size: self.parent.size 
@@ -77,13 +77,13 @@ GridLayout:
 			    	
 			    	on_press: 
 			    		root.capture()
-			    		app.root.ids.overlay.createimg()
 			    	on_release: 
+			    		app.root.ids.overlay.createimg()
 			    		app.root.ids['screenmanager'].transition.direction = 'left'
 			    		app.root.ids['screenmanager'].current = 'overlay'
 			    	
 			    	Image:
-			    		source: 'shutterbtn_up.png' if self.parent.state=="normal" else 'shutterbtn_down.png'
+			    		source: 'shutterbtn_up_white.png' if self.parent.state=="normal" else 'shutterbtn_down_white.png'
 			    		center_x: self.parent.center_x
 			    		center_y: self.parent.center_y
 			    		size: self.parent.size 
@@ -95,21 +95,21 @@ GridLayout:
 			    
 			    Button:
 			    	id: cyclebtn
-			    	text: "Next cam"
 			    	pos_hint: {"center_x":0.5, "center_y":0.5}
 			    	size: self.parent.size
-			    	size_hint: 0.8,0.8#This is neccessary
+			    	size_hint: 0.6,0.6#This is neccessary
 			    	background_color: 0,0,0,0
-			    	canvas.before: 
-			    		Color:
-			    			rgba: (0.247,0.749,0.749,0.5) if self.state=="normal" else (0.247,0.749,0.749,1)
-			    		RoundedRectangle:
-			    			size: min(self.size),min(self.size)
-			    			pos: self.pos
-			    			radius: [10,]
-			    			
+
 			    	on_press: 
 			    		root.cyclecam()
+
+			    	Image:
+			    		source: 'nextcambtn_down.png' if self.parent.state=="normal" else 'nextcambtn_up.png'
+			    		center_x: self.parent.center_x
+			    		center_y: self.parent.center_y
+			    		size: self.parent.size 
+			    		allow_stretch: False
+			    	
 
 
 <OverlayWindow>:
@@ -118,14 +118,23 @@ GridLayout:
 		id: overlay_mainfloat	
 		canvas.before:
 		    Color:
-		        rgba: 1, 1, 1, 1
+		        rgba: 1,1,1,1
 		    Rectangle:
 		        pos: self.pos
 		        size: self.size
 
-		GridLayout:
+		FloatLayout:
 			cols: 1
 			id: checkwindow
+			pos_hint: {"top":1}
+			size_hint: 1,0.8
+			canvas: 
+		        Color:
+		            rgba: 0,0,0,1#this doesn't work?
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+
 
 			
 
@@ -138,7 +147,7 @@ GridLayout:
 			size_hint: 1, 0.2
 			canvas.before:
 		        Color:
-		            rgba: 0,0,0,0.5
+		            rgba: 0,0,0,1
 		        Rectangle:
 		            pos: self.pos
 		            size: self.size
@@ -157,7 +166,7 @@ GridLayout:
 				    	root.removeimg()
 
 			    	Image:
-			    		source: 'backbtn_up.png' if self.parent.state=="normal" else 'backbtn_down.png'
+			    		source: 'backbtn_up_white.png' if self.parent.state=="normal" else 'backbtn_down_white.png'
 			    		center_x: self.parent.center_x
 			    		center_y: self.parent.center_y
 			    		size: self.parent.size 
@@ -166,10 +175,43 @@ GridLayout:
 
 				    
 
-			Label:
+			FloatLayout:
+				#These might be comically small on mobile
+				MDIconButton:
+					pos_hint: {"top":1, "center_x":0.5}
+					icon: "plus-circle-outline"
+					opposite_colors: True
+					on_release: root.add_blank()
+				MDIconButton:
+					pos_hint: {"bottom":0.75, "center_x":0.5}
+					icon: "minus-circle-outline"
+					opposite_colors: True
+					on_release: root.minus_blank()
+				Label:
+					id: blank_count
+					pos_hint: {"center_x":0.5, "center_y":0.5}
+					text: "BLANKS +0"
+					text_color: (1,1,1,1)
 				
 
-			Label:
+			FloatLayout:
+				#These might be comically small on mobile
+				MDIconButton:
+					pos_hint: {"top":1, "center_x":0.5}
+					icon: "plus-circle-outline"
+					opposite_colors: True
+					on_release: root.add_dot()
+				MDIconButton:
+					pos_hint: {"bottom":0.75, "center_x":0.5}
+					icon: "minus-circle-outline"
+					opposite_colors: True
+					on_release: root.minus_dot()
+				Label:
+					id: dot_count
+					pos_hint: {"center_x":0.5, "center_y":0.5}
+					text: "DOTS +0"
+					text_color: (1,1,1,1)
+				
 		
 			
 
