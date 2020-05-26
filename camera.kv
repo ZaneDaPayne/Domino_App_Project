@@ -49,10 +49,10 @@ GridLayout:
 		            pos: self.pos
 		            size: self.size
 
-			Camera:
+			XCamera:
 				id: camera
 				index: 0
-				resolution: self.size
+				resolution: self.resolution
 				play: True
 
 		GridLayout:
@@ -95,9 +95,10 @@ GridLayout:
 			    	background_color: 0,0,0,0
 			    	
 			    	on_press: 
-			    		root.capture()
+			    		#takes picture and saves
+			    		#root.ids.camera.shoot() 
 			    	on_release: 
-			    		app.root.ids.overlay.createimg()
+			    		#app.root.ids.overlay.createimg()
 			    		app.root.ids['screenmanager'].transition.direction = 'left'
 			    		app.root.ids['screenmanager'].current = 'overlay'
 			    	
