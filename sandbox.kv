@@ -2,6 +2,9 @@ GridLayout:
 	cols: 1
 	Screenmanager:
 		id: screenmanager
+		StartScreen:
+			name: "start"
+			id :start
 		MainWindow:
 			name: "main"
 			id: main
@@ -9,12 +12,28 @@ GridLayout:
 			name: "overlay"
 			id: overlay
 
+<StartScreen>:
+	FloatLayout:
+		canvas.before:
+		    Color:
+		        rgba: 0,0,0, 1
+		    Rectangle:
+		        pos: self.pos
+		        size: self.size
+
+		Button:
+			pos_hint: {'center_x':0.5, 'center_y':0.5}
+			size_hint: 0.2,0.1
+			text: "Start"
+			on_release:
+				app.root.ids.screenmanager.transition.direction = 'left'
+				app.root.ids.screenmanager.current = 'main'
 <MainWindow>:
 
 	FloatLayout:
 		canvas.before:
 		    Color:
-		        rgba: 1, 1, 1, 1
+		        rgba: 0,0,0, 1
 		    Rectangle:
 		        pos: self.pos
 		        size: self.size
@@ -30,11 +49,12 @@ GridLayout:
 		            pos: self.pos
 		            size: self.size
 
-			Camera:
+			MyCamera:
 				id: camera
 				index: 0
-				resolution: self.size
+				resolution: self.resolution
 				play: True
+				
 
 		GridLayout:
 			cols: 3
@@ -57,7 +77,7 @@ GridLayout:
 			    	background_color: 0,0,0,0
 			    	on_press:
 				    	app.root.ids.screenmanager.transition.direction = 'right'
-				    	app.root.ids.screenmanager.current = 'main'
+				    	app.root.ids.screenmanager.current = 'start'
 
 			    	Image:
 			    		source: 'backbtn_up_white.png' if self.parent.state=="normal" else 'backbtn_down_white.png'
@@ -76,7 +96,7 @@ GridLayout:
 			    	background_color: 0,0,0,0
 			    	
 			    	on_press: 
-			    		root.capture()
+			    		root.ids.camera.shoot() #takes picture and saves
 			    	on_release: 
 			    		app.root.ids.overlay.createimg()
 			    		app.root.ids['screenmanager'].transition.direction = 'left'
@@ -118,13 +138,12 @@ GridLayout:
 		id: overlay_mainfloat	
 		canvas.before:
 		    Color:
-		        rgba: 1,1,1,1
+		        rgba: 0,0,0,1
 		    Rectangle:
 		        pos: self.pos
 		        size: self.size
 
 		FloatLayout:
-			cols: 1
 			id: checkwindow
 			pos_hint: {"top":1}
 			size_hint: 1,0.8
@@ -134,12 +153,17 @@ GridLayout:
 		        Rectangle:
 		            pos: self.pos
 		            size: self.size
-
-
-			
-
-
-
+		    Label:
+		    	id: score_label
+		    	pos_hint:{"center_y":0.05}
+		    	size_hint:1,0.1
+		    	text: f"Score: {root.score}"
+		    	canvas.before:
+				    Color:
+				        rgba: 0.1,0.1,0.1,1
+				    Rectangle:
+				        pos: self.pos
+				        size: self.size
     
     	GridLayout:
 			cols: 3
@@ -163,7 +187,7 @@ GridLayout:
 			    	on_release:
 				    	app.root.ids.screenmanager.transition.direction = 'right'
 				    	app.root.ids.screenmanager.current = 'main'
-				    	root.removeimg()
+				    	root.reset()
 
 			    	Image:
 			    		source: 'backbtn_up_white.png' if self.parent.state=="normal" else 'backbtn_down_white.png'
