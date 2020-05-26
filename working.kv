@@ -1,116 +1,241 @@
-<MainWindow>:
-	
-	canvas.before:
-	    Color:
-	        rgba: 1, 1, 1, 1
-	    Rectangle:
-	        pos: self.pos
-	        size: self.size
+GridLayout:
+	cols: 1
+	Screenmanager:
+		id: screenmanager
+		StartScreen:
+			name: "start"
+			id :start
+		MainWindow:
+			name: "main"
+			id: main
+		OverlayWindow:
+			name: "overlay"
+			id: overlay
 
-	GridLayout:
-		id: camerawindow
-		cols: 1
-		pos_hint: {"top":1}
-		size_hint: 1, 0.8
-
-		canvas.before: 
-	        Color:
-	            rgba: 0, 0, 0, 1
-	        Rectangle:
-	            pos: self.pos
-	            size: self.size
-
-		Label:
-			id: view
-			text: "view"
-
-	GridLayout:
-		id: controlwindow
-		cols: 3
-		pos_hint: {"bottom":1}
-		size_hint: 1, 0.2
-
+<StartScreen>:
+	FloatLayout:
 		canvas.before:
-	        Color:
-	            rgba: 0,0,0,0.5
-	        Rectangle:
-	            pos: self.pos
-	            size: self.size
+		    Color:
+		        rgba: 0,0,0, 1
+		    Rectangle:
+		        pos: self.pos
+		        size: self.size
 
-	    FloatLayout:
-	    	id: leftwindow
-		    Button:
-		    	id: backbtn # Put this in a float layout in a grid layout to fix this.
-		    	 
-		    	pos_hint: {"center_x":0.5,"center_y":0.5}
-		    	size: min(self.size),min(self.size)
-		    	size_hint: None,None #This is neccessary
-		    	text: "Back"
-		    	background_color: 0,0,0,0
+		Button:
+			pos_hint: {'center_x':0.5, 'center_y':0.5}
+			size_hint: 0.2,0.1
+			text: "Start"
+			on_release:
+				app.root.ids.screenmanager.transition.direction = 'left'
+				app.root.ids.screenmanager.current = 'main'
+<MainWindow>:
 
-		    	canvas.before: 
-		    		Color:
-		    			rgba: (1,0,0,0.3) if self.state=="normal" else (1,0,0,0.5)
-		    		RoundedRectangle:
-		    			size: self.size
-		    			pos: self.pos
-		    			radius: [10,]
+	FloatLayout:
+		canvas.before:
+		    Color:
+		        rgba: 0,0,0, 1
+		    Rectangle:
+		        pos: self.pos
+		        size: self.size
 
-		    	on_press: 
-		    		root.ids.view.text = "Back"
-		    	on_release:
-		    		root.ids.view.text = "view"
-		    	
+		GridLayout:
+			cols: 1
+			pos_hint: {"top":1}
+			size_hint: 1, 0.8
+			canvas.before: 
+		        Color:
+		            rgba: 0, 0, 0, 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+
+			XCamera:
+				id: camera
+				index: 0
+				resolution: self.resolution
+				play: True
+
+		GridLayout:
+			cols: 3
+			pos_hint: {"bottom":1}
+			size_hint: 1, 0.2
+			canvas.before:
+		        Color:
+		            rgba: 0,0,0,1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+
+		    FloatLayout:
+	
+			    Button:
+			    	id: backbtn		    	 
+			    	pos_hint: {"center_x":0.5,"center_y":0.5}
+			    	#size: min(self.size),min(self.size)
+			    	size_hint: 0.5,0.5 #This is neccessary
+			    	background_color: 0,0,0,0
+			    	on_press:
+				    	app.root.ids.screenmanager.transition.direction = 'right'
+				    	app.root.ids.screenmanager.current = 'start'
+
+			    	Image:
+			    		source: 'backbtn_up_white.png' if self.parent.state=="normal" else 'backbtn_down_white.png'
+			    		center_x: self.parent.center_x
+			    		center_y: self.parent.center_y
+			    		size: self.parent.size 
+			    		allow_stretch: False			    	
+
+			FloatLayout:
+			   
+			    Button:
+			    	id: shutterbtn
+			    	pos_hint: {"center_x":0.5, "center_y":0.5}
+			    	#size: min(self.size),min(self.size)
+			    	size_hint: 0.7,0.7 #This is neccessary
+			    	background_color: 0,0,0,0
+			    	
+			    	on_press: 
+			    		#takes picture and saves
+			    		#root.ids.camera.shoot() 
+			    	on_release: 
+			    		#app.root.ids.overlay.createimg()
+			    		app.root.ids['screenmanager'].transition.direction = 'left'
+			    		app.root.ids['screenmanager'].current = 'overlay'
+			    	
+			    	Image:
+			    		source: 'shutterbtn_up_white.png' if self.parent.state=="normal" else 'shutterbtn_down_white.png'
+			    		center_x: self.parent.center_x
+			    		center_y: self.parent.center_y
+			    		size: self.parent.size 
+			    		allow_stretch: False	 			
+			    	
+			    		
+		    FloatLayout:
+		    	pos_hint: {"center_x":0.5, "center_y":0.5}
+			    
+			    Button:
+			    	id: cyclebtn
+			    	pos_hint: {"center_x":0.5, "center_y":0.5}
+			    	size: self.parent.size
+			    	size_hint: 0.6,0.6#This is neccessary
+			    	background_color: 0,0,0,0
+
+			    	on_press: 
+			    		root.cyclecam()
+
+			    	Image:
+			    		source: 'nextcambtn_down.png' if self.parent.state=="normal" else 'nextcambtn_up.png'
+			    		center_x: self.parent.center_x
+			    		center_y: self.parent.center_y
+			    		size: self.parent.size 
+			    		allow_stretch: False
+			    	
+
+
+<OverlayWindow>:
+
+	FloatLayout:
+		id: overlay_mainfloat	
+		canvas.before:
+		    Color:
+		        rgba: 0,0,0,1
+		    Rectangle:
+		        pos: self.pos
+		        size: self.size
 
 		FloatLayout:
-			id: centerwindow
-		    Button:
-		    	id: shutterbtn
-		    	pos_hint: {"center_x":0.5, "center_y":0.5}
-		    	size: min(self.size),min(self.size)
-		    	size_hint: None,None #This is neccessary
-		    	background_color: 0,0,0,0
+			id: checkwindow
+			pos_hint: {"top":1}
+			size_hint: 1,0.8
+			canvas: 
+		        Color:
+		            rgba: 0,0,0,1#this doesn't work?
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    Label:
+		    	id: score_label
+		    	pos_hint:{"center_y":0.05}
+		    	size_hint:1,0.1
+		    	text: f"Score: {root.score}"
+		    	canvas.before:
+				    Color:
+				        rgba: 0.1,0.1,0.1,1
+				    Rectangle:
+				        pos: self.pos
+				        size: self.size
+    
+    	GridLayout:
+			cols: 3
+			pos_hint: {"bottom":1}
+			size_hint: 1, 0.2
+			canvas.before:
+		        Color:
+		            rgba: 0,0,0,1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
 
-		    	canvas.before: 
-		    		Color:
-		    			rgba: (0,0,1,0.3) if self.state=="normal" else (0,0,1,0.5)
-		    		Ellipse:
-		    			size: self.size
-		    			pos: self.pos
-		    			
-		    	text: "Capture"
-		    	on_press: 
-		    		root.ids.view.text = "Click!"
-		    	on_release: 
-		    		root.ids.view.text = "view"
-		    		
-	    FloatLayout:
-			id: rightwindow
-		    Button:
-		    	id: cyclebtn
-		    	pos_hint: {"center_x":0.5, "center_y":0.5}
-		    	size: min(self.size),min(self.size)
-		    	size_hint: None,None #This is neccessary
-		    	background_color: 0,0,0,0
+		    FloatLayout:
 
-		    	canvas.before: 
-		    		Color:
-		    			rgba: (0.247,0.749,0.749,0.5) if self.state=="normal" else (0.247,0.749,0.749,1)
-		    		RoundedRectangle:
-		    			size: self.size
-		    			pos: self.pos
-		    			radius: [10,]
-		    			
-		    	text: "Next cam"
-		    	on_press: 
-		    		root.ids.view.text = "next cam"
-		    	on_release: 
-		    		root.ids.view.text = "view"
+			    Button:
+			    	id: backbtn2		    	 
+			    	pos_hint: {"center_x":0.5,"center_y":0.5}
+			    	#size: min(self.size),min(self.size)
+			    	size_hint: 0.5,0.5 #This is neccessary
+			    	background_color: 0,0,0,0
+			    	on_release:
+				    	app.root.ids.screenmanager.transition.direction = 'right'
+				    	app.root.ids.screenmanager.current = 'main'
+				    	root.reset()
+
+			    	Image:
+			    		source: 'backbtn_up_white.png' if self.parent.state=="normal" else 'backbtn_down_white.png'
+			    		center_x: self.parent.center_x
+			    		center_y: self.parent.center_y
+			    		size: self.parent.size 
+			    		allow_stretch: False
 
 
-	
+				    
 
+			FloatLayout:
+				#These might be comically small on mobile
+				MDIconButton:
+					pos_hint: {"top":1, "center_x":0.5}
+					icon: "plus-circle-outline"
+					opposite_colors: True
+					on_release: root.add_blank()
+				MDIconButton:
+					pos_hint: {"bottom":0.75, "center_x":0.5}
+					icon: "minus-circle-outline"
+					opposite_colors: True
+					on_release: root.minus_blank()
+				Label:
+					id: blank_count
+					pos_hint: {"center_x":0.5, "center_y":0.5}
+					text: "BLANKS +0"
+					text_color: (1,1,1,1)
+				
 
+			FloatLayout:
+				#These might be comically small on mobile
+				MDIconButton:
+					pos_hint: {"top":1, "center_x":0.5}
+					icon: "plus-circle-outline"
+					opposite_colors: True
+					on_release: root.add_dot()
+				MDIconButton:
+					pos_hint: {"bottom":0.75, "center_x":0.5}
+					icon: "minus-circle-outline"
+					opposite_colors: True
+					on_release: root.minus_dot()
+				Label:
+					id: dot_count
+					pos_hint: {"center_x":0.5, "center_y":0.5}
+					text: "DOTS +0"
+					text_color: (1,1,1,1)
+				
 		
 			
 
