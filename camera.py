@@ -14,13 +14,18 @@ from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 import matplotlib.pyplot as plt
 from kivy.properties import DictProperty
 from kivy.utils import platform
-from kivy.garden.xcamera import XCamera
+from xcamera import XCamera
+import cv2
+import numpy as np
+
+class MyCamera(XCamera):
+    pass
 
 class Screenmanager(ScreenManager):
     pass
 
 class StartScreen(Screen):
-    pass
+    pass   
     
 class MainWindow(Screen):
     def __init__(self,**kwargs):
@@ -31,13 +36,20 @@ class MainWindow(Screen):
         return platform == 'android'
     def _request_android_permissions(self):
         """
-        Requests CAMERA permission on Android.
+        Requests CAMERA, and read/write permission on Android.
         """
         if not self.is_android():
             return
-        from android.permissions import request_permission, Permission
-        request_permission(Permission.CAMERA)
-        
+        from android.permissions import request_permissions, Permission
+        request_permissions([Permission.CAMERA,Permission.WRITE_EXTERNAL_STORAGE,
+                            Permission.READ_EXTERNAL_STORAGE])
+          
+    def create_cam(self):
+        app = MDApp.get_running_app()
+        cam = XCamera(index=0,play=True)
+        print("\n\n",self.ids,"\n\n")
+        self.ids.camwindow.add_widget(cam)
+        app.dynamic_ids['cam'] = cam
         
     def cyclecam(self):
         index = self.ids.camera.index
@@ -91,11 +103,13 @@ class OverlayWindow(Screen):
         self.update_score()
     
     def update_score(self):
+        print("update_score\nself.num_dots:",self.num_dots)
         self.score = (self.num_dots+self.add_dots_val)+(self.num_blanks+self.add_blanks_val)*25
         self.ids.score_label.text = f"Score: {self.score}"
         print(self.ids.score_label.text)
         
     def reset(self):
+        print("reset")
         try:
             os.remove("IMG_domino.jpg")
         except:
@@ -109,6 +123,53 @@ class OverlayWindow(Screen):
         self.update_score()
         self.ids.blank_count.text = f"BLANKS +0"
         self.ids.dot_count.text = f"DOTS +0"
+        
+    def createimg(self):
+        print("createimg")
+        self.im = cv2.imread("IMG_domino.jpg")
+        fig = plt.figure(figsize=(20,20))
+        ax = fig.add_axes((0,0,1,1))
+        ax.axis("off")
+        
+        from matplotlib.patches import Rectangle,Circle
+        
+        b,g,r = cv2.split(self.im)#convert to rgb
+        im_c = cv2.merge([r,g,b])
+        ax.imshow(im_c) # show color image
+        im = cv2.cvtColor(self.im,cv2.COLOR_BGR2GRAY)
+        
+        min_size = min(im.shape)*0.01
+        max_size = min(im.shape)*0.1
+        
+        th, thresh = cv2.threshold(im,100,225,cv2.THRESH_BINARY_INV|cv2.THRESH_OTSU)
+        contours = cv2.findContours(thresh,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)[-2]
+        
+        dots = []
+        for cnt in contours: 
+            xy,radius = cv2.minEnclosingCircle(cnt)
+            x = cnt[:,0,0]
+            y = cnt[:,0,1]
+            width,height = max(x)-min(x),max(y)-min(y)
+            if (min_size<radius<max_size)&(min(width,height)*1.5>max(width,height)):
+                dots.append([xy,radius])
+        
+        for dot in dots:
+            xy, radius = dot
+            circ = Circle(xy,radius,fc='none',ec='yellow',lw=2)
+            ax.add_patch(circ,)
+            
+        self.num_dots = len(dots)
+        self.update_score()
+        self.drawimg()
+        
+    def drawimg(self):
+        print("drawimg")
+        app = MDApp.get_running_app()
+        plot = FigureCanvasKivyAgg(plt.gcf(),pos_hint={"top":1})
+        self.ids.checkwindow.add_widget(plot) # add plot to the check window          
+        app.dynamic_ids['plot'] = plot
+        plt.close() #closes figures for the next run        
+    
 
 class CameraApp(MDApp):
     dynamic_ids = DictProperty({}) # my own dictionary for dynamic widget ids
