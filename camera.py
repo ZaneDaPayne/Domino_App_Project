@@ -46,6 +46,8 @@ class MainWindow(Screen):
           
     def create_cam(self):
         app = MDApp.get_running_app()
+        if 'cam' in app.dynamic_ids:
+            return
         cam = XCamera(index=0,play=True)
         print("\n\n",self.ids,"\n\n")
         self.ids.camwindow.add_widget(cam)
