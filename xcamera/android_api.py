@@ -30,7 +30,7 @@ class PictureCallback(PythonJavaClass):
         s = data.tostring()
         with open(self.filename, 'wb') as f:
             f.write(s)
-        Logger.info('xcamera: picture saved to %s', self.filename)
+        Logger.info('xcamera: python picture saved to %s', self.filename)
         camera.startPreview()
         self.on_success(self.filename)
 

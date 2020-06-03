@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import os
 import datetime
 from kivy.lang import Builder
+from kivy.utils import platform
 from kivy.uix.camera import Camera
 from kivy.uix.label import Label
 from kivy.uix.behaviors import ButtonBehavior
@@ -52,7 +53,11 @@ class XCameraIconButton(ButtonBehavior, Label):
 
 
 class XCamera(Camera):
-    directory = ObjectProperty(None)
+    if platform=='android':
+        from android import storage
+        directory=storage.primary_external_storage_path()
+    else:
+        directory='./'
     _previous_orientation = None
     __events__ = ('on_picture_taken',)
 
