@@ -20,11 +20,23 @@ GridLayout:
 		    Rectangle:
 		        pos: self.pos
 		        size: self.size
+		Image:
+			pos_hint: {'center_x':0.5,'top':1}
+			size_hint: 1.5,1.5
+			source: "startscreen.png"
+
+		Label:
+			pos_hint: {'center_x':0.5,'top':1}
+			markup: True
+			text: "[size=26]Domino App[/size]"
+
 
 		Button:
-			pos_hint: {'center_x':0.5, 'center_y':0.5}
+			pos_hint: {'center_x':0.5, 'center_y':0.1}
 			size_hint: 0.2,0.1
 			text: "Start"
+			on_press:
+				app.root.ids.main.create_cam()
 			on_release:
 				app.root.ids.screenmanager.transition.direction = 'left'
 				app.root.ids.screenmanager.current = 'main'
@@ -39,6 +51,7 @@ GridLayout:
 		        size: self.size
 
 		GridLayout:
+			id: camwindow
 			cols: 1
 			pos_hint: {"top":1}
 			size_hint: 1, 0.8
@@ -48,12 +61,6 @@ GridLayout:
 		        Rectangle:
 		            pos: self.pos
 		            size: self.size
-
-			MyCamera:
-				id: camera
-				index: 0
-				resolution: self.resolution
-				play: True
 				
 
 		GridLayout:
@@ -96,7 +103,7 @@ GridLayout:
 			    	background_color: 0,0,0,0
 			    	
 			    	on_press: 
-			    		root.ids.camera.shoot() #takes picture and saves
+			    		app.dynamic_ids.cam.shoot() #takes picture and saves
 			    	on_release: 
 			    		app.root.ids.overlay.createimg()
 			    		app.root.ids['screenmanager'].transition.direction = 'left'
@@ -113,22 +120,22 @@ GridLayout:
 		    FloatLayout:
 		    	pos_hint: {"center_x":0.5, "center_y":0.5}
 			    
-			    Button:
-			    	id: cyclebtn
-			    	pos_hint: {"center_x":0.5, "center_y":0.5}
-			    	size: self.parent.size
-			    	size_hint: 0.6,0.6#This is neccessary
-			    	background_color: 0,0,0,0
+			    #Button:
+			    #	id: cyclebtn
+			    #	pos_hint: {"center_x":0.5, "center_y":0.5}
+			    #	size: self.parent.size
+			    #	size_hint: 0.6,0.6#This is neccessary
+			    #	background_color: 0,0,0,0
 
-			    	on_press: 
-			    		root.cyclecam()
+			    #	on_press: 
+			    #		root.cyclecam()
 
-			    	Image:
-			    		source: 'nextcambtn_down.png' if self.parent.state=="normal" else 'nextcambtn_up.png'
-			    		center_x: self.parent.center_x
-			    		center_y: self.parent.center_y
-			    		size: self.parent.size 
-			    		allow_stretch: False
+			    #	Image:
+			    #		source: 'nextcambtn_down.png' if self.parent.state=="normal" else 'nextcambtn_up.png'
+			    #		center_x: self.parent.center_x
+			    #		center_y: self.parent.center_y
+			    #		size: self.parent.size 
+			    #		allow_stretch: False
 			    	
 
 
@@ -146,24 +153,24 @@ GridLayout:
 		FloatLayout:
 			id: checkwindow
 			pos_hint: {"top":1}
-			size_hint: 1,0.8
+			size_hint: 1,0.7
 			canvas: 
 		        Color:
 		            rgba: 0,0,0,1#this doesn't work?
 		        Rectangle:
 		            pos: self.pos
 		            size: self.size
-		    Label:
-		    	id: score_label
-		    	pos_hint:{"center_y":0.05}
-		    	size_hint:1,0.1
-		    	text: f"Score: {root.score}"
-		    	canvas.before:
-				    Color:
-				        rgba: 0.1,0.1,0.1,1
-				    Rectangle:
-				        pos: self.pos
-				        size: self.size
+		Label:
+		    id: score_label
+		    pos_hint:{"y":0.2,"center_x":0.5}
+		    size_hint:1,0.1
+		    text: f"Score: {root.score}"
+		    canvas.before:
+			    Color:
+			        rgba: 0.1,0.1,0.1,1
+			    Rectangle:
+			        pos: self.pos
+			        size: self.size    
     
     	GridLayout:
 			cols: 3
