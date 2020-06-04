@@ -30,14 +30,14 @@ Some features of the code.
 
 The app allows users to correct for over/under counting of either dots or blank spaces with buttons to increment both. This allows the app to be useable even when the detection misses something or picks something up in the background.
 
-Some picture of this feature.
 
 In the future we would like to add setting so the user can change the value of blank spaces if they wish to play different rules.
 
 We also would like to allow the user to change some parameters for the detection code, to improve it's accuracy under specific conditions.
 
 # Documentation
-
+See the documentation to learn more about  [Kivi](https://buildmedia.readthedocs.org/media/pdf/kivy/latest/kivy.pdf) and [KiviMD](https://kivymd.readthedocs.io/en/latest/) .
+To learn more about image processing tools, see the [SciKit Image Documentation](https://scikit-image.org/docs/stable/).
 # Installation
 When the app is fully functioning on android, an apk will be added to the main branch. 
 
@@ -60,4 +60,4 @@ To run the app on desktop:
         - With kivy installed, open a terminal and type ```garden install matplotlib```
 2. Clone or download the repository and run the main.py file
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Detection](detection.png)
