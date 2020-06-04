@@ -59,5 +59,8 @@ To run the app on desktop:
     - garden.matplotlib
         - With kivy installed, open a terminal and type ```garden install matplotlib```
 2. Clone or download the repository and run the main.py file
+
+
 Here is an example of the detection on a Windows Application
+
 ![Image of Detection](https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/detection.PNG)
