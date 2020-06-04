@@ -60,4 +60,4 @@ To run the app on desktop:
         - With kivy installed, open a terminal and type ```garden install matplotlib```
 2. Clone or download the repository and run the main.py file
 
-![Image of Detection]("detection.PNG")
+![](/Images/detection.png)
