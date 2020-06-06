@@ -58,7 +58,7 @@ To run the app on desktop:
     - matplotlib
     - garden.matplotlib
         - With kivy installed, open a terminal and type ```garden install matplotlib```
-2. Clone or download the repository and run the main.py file
+2. Clone or download the app_gui branch and run the camera.py file
 
 
 Here is an example of the detection on a Windows Application
