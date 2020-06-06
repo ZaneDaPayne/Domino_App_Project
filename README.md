@@ -55,6 +55,7 @@ To run the app on desktop:
 1. Install Kivy and other depdencies
     - KivyMD
     - scikit-image
+    - opencv
     - matplotlib
     - garden.matplotlib
         - With kivy installed, open a terminal and type ```garden install matplotlib```
