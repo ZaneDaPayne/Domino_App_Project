@@ -36,7 +36,7 @@ In the future we would like to add setting so the user can change the value of b
 We also would like to allow the user to change some parameters for the detection code, to improve it's accuracy under specific conditions.
 
 # Documentation
-See the documentation to learn more about  [Kivi](https://buildmedia.readthedocs.org/media/pdf/kivy/latest/kivy.pdf) and [KiviMD](https://kivymd.readthedocs.io/en/latest/) .
+See the documentation to learn more about  [Kivy](https://buildmedia.readthedocs.org/media/pdf/kivy/latest/kivy.pdf) and [KivyMD](https://kivymd.readthedocs.io/en/latest/) .
 To learn more about image processing tools, see the [SciKit Image Documentation](https://scikit-image.org/docs/stable/).
 # Installation
 When the app is fully functioning on android, an apk will be added to the main branch. 
