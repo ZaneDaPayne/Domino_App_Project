@@ -37,7 +37,7 @@ We also would like to allow the user to change some parameters for the detection
 
 # Documentation
 See the documentation to learn more about  [Kivy](https://buildmedia.readthedocs.org/media/pdf/kivy/latest/kivy.pdf) and [KivyMD](https://kivymd.readthedocs.io/en/latest/) .
-To learn more about image processing tools, see the [SciKit Image Documentation](https://scikit-image.org/docs/stable/).
+To learn more about image processing tools, see the [SciKit-Image Documentation](https://scikit-image.org/docs/stable/).
 # Installation
 When the app is fully functioning on android, an apk will be added to the main branch. 
 
