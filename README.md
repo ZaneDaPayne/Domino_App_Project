@@ -8,11 +8,11 @@ Totaling scores after a game of dominos can be annoying and the game would be mo
 
 # Build Status
 
-**Phase I: Domino dot recognition (SciKit Image and PIL)**
+**Phase I: Domino dot recognition (SciKit-Image, OpenCV, and PIL)**
 
 The goal of this phase is to write a program that can detect and count dots and blank spaces for various domino arrangement. During the coding process, it is important that the program includes salient features to account for noisy backgrounds, blurry images, cropped out dominos, colored dominos and dots, shadows, and other anomalies that may be captured by a phone camera.
 
-**Methods (Codes Available in Repo):
+**Methods** (Codes Available in [Image-Processing-Codes](https://github.com/ZaneDaPayne/Domino_App_Project/tree/Image-Processing-Codes) branch):
 1. Defining and drawing contours
 2. ImageProps
 3. Edge Detection
@@ -21,47 +21,55 @@ The goal of this phase is to write a program that can detect and count dots and 
 6. Blob Detection
 
 **Phase II: App Design (Kivy)**
-We are currently in the process of developing an app to integrate our domino detection code using Kivy. The goal is to create a UI that is appealing and user-friendly on Android devices using Python code.
 
-Currently there is no python4android recipe for scikit-image. This means we cannot compile our fully featured app that uses tools from scikit-image to do the detection. Checkout the [app_gui](https://github.com/ZaneDaPayne/Domino_App_Project/tree/app_gui) branch to see the current progress on this and more.
+We are currently in the process of developing an Android app to integrate our domino detection code using Kivy. The goal is to create a UI that is appealing and user-friendly, while still being feature rich.
+
+Currently there is no python4android recipe for scikit-image. This means we cannot compile our fully featured app that uses tools from scikit-image to do the detection. The current working version uses tools from OpenCV instead. Checkout the [app_gui](https://github.com/ZaneDaPayne/Domino_App_Project/tree/app_gui) branch to see the current progress on this and more.
 
 # Features
-Some features of the code.
+**Detection:**
 
-The app allows users to correct for over/under counting of either dots or blank spaces with buttons to increment both. This allows the app to be useable even when the detection misses something or picks something up in the background.
+Detects and counts regions of contrast that are taken to be dots.
 
+**App:**
 
-In the future we would like to add setting so the user can change the value of blank spaces if they wish to play different rules.
+The app allows users to correct for over/under counting of either dots or blank spaces with buttons to increment both. This allows the app to be useable even when the detection misses something or detects false positives.
 
-We also would like to allow the user to change some parameters for the detection code, to improve it's accuracy under specific conditions.
+*In the future* we would like to add settings so the user can change the value of blank spaces if they wish to play using different rules, and choose the type of dominoes (white dots, black dots, colored dots) and the type of environment (light, dark) to increase the accuracy of detection.
 
 # Documentation
 See the documentation to learn more about  [Kivy](https://buildmedia.readthedocs.org/media/pdf/kivy/latest/kivy.pdf) and [KivyMD](https://kivymd.readthedocs.io/en/latest/) .
-To learn more about image processing tools, see the [SciKit-Image Documentation](https://scikit-image.org/docs/stable/).
+To learn more about image processing tools, see the [SciKit-Image Documentation](https://scikit-image.org/docs/stable/) and [OpenCV Documentation](https://docs.opencv.org/master/index.html).
 # Installation
-When the app is fully functioning on android, an apk will be added to the main branch. 
+We finally have a functioning app available for download. This is still full of bugs and lacking in features, but it functions with careful use.
+
+**NOTE:** You *must* hold the shutter button until you hear the shutter sound (about 1 sec) or the app will crash. It will take about 2 seconds to then change screens and show the score.
 
 To install the apk:
 1. Download the apk file to your android phone
 2. Locate and try to open the file
 3. Select allow install from unkown sources
-The app should now install and be ready to use.
+4. Select open or locate and open the installed app
+5. Accept the storage and camera permissions
 
+The app is now ready to use.
 
-# Setup
-Until the app is fully functional on android you can run the app on your desktop to see the proof of concept.
+# Useage
+When first opening the app you should see prompts to allow permissions, tap accept for both.
 
-To run the app on desktop:
-1. Install Kivy and other depdencies
-    - KivyMD
-    - scikit-image
-    - opencv
-    - matplotlib
-    - garden.matplotlib
-        - With kivy installed, open a terminal and type ```garden install matplotlib```
-2. Clone or download the app_gui branch and run the camera.py file
+.
+<img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/Step%201.jpg" alt="Allow camera access" width="300"/>
+<img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/Step%202.jpg" alt="Allow storage access" width="300"/>
+.
 
+Press the start button and wait for the camera to initialize (~1 sec).
 
-Here is an example of the detection on a Windows Application
+<img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/Step%203.jpg" alt="Start" width="300"/>
 
-![Image of Detection](https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/detection.PNG)
+Hold the shutter button until you hear the shutter sound, or about 1 second, then release to take the picture.
+
+<img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/Step%204.jpg" alt="Take the picture" width="300"/>
+
+After another 1-2 seconds you will be taken to the scoring screen where you can see the detected dots and the calculated score. Use the buttons labeled DOTS and BLANKS to adjust for over/under counting.
+
+<img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/Step%205.jpg" alt="The score is displayed" width="300"/>
