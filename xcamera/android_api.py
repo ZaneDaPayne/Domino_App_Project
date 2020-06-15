@@ -4,7 +4,7 @@ from kivy.logger import Logger
 
 Camera = autoclass('android.hardware.Camera')
 AndroidActivityInfo = autoclass('android.content.pm.ActivityInfo')
-AndroidPythonActivity = autoclass('org.renpy.android.PythonActivity')
+AndroidPythonActivity = autoclass('org.kivy.android.PythonActivity')
 
 class ShutterCallback(PythonJavaClass):
     __javainterfaces__ = ('android.hardware.Camera$ShutterCallback', )
@@ -28,9 +28,11 @@ class PictureCallback(PythonJavaClass):
     @java_method('([BLandroid/hardware/Camera;)V')
     def onPictureTaken(self, data, camera):
         s = data.tostring()
+        #print(data.shape)
         with open(self.filename, 'wb') as f:
             f.write(s)
-        Logger.info('xcamera: python picture saved to %s', self.filename)
+        Logger.info('xcamera: picture saved to %s', self.filename)
+        print(f"Domino Image saved to: {self.filename}")
         camera.startPreview()
         self.on_success(self.filename)
 
@@ -77,7 +79,7 @@ LANDSCAPE = AndroidActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
 def set_orientation(value):
     previous = get_orientation()
-    AndroidPythonActivity.mActivity.setRequestedOrientation(value)
+    AndroidPythonActivity.mActivity.setRequestedOrientation(PORTRAIT) #changed from value to PORTRAT
     return previous
 
 def get_orientation():

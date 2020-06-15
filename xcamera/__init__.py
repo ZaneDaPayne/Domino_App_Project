@@ -76,6 +76,8 @@ class XCamera(Camera):
         filename = self.get_filename()
         if self.directory:
             filename = os.path.join(self.directory, filename)
+        else:
+            print("No self.directory!")
         take_picture(self, filename, on_success)
 
     def force_landscape(self):
