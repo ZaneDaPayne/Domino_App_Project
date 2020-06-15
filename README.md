@@ -54,7 +54,7 @@ To install the apk:
 
 The app is now ready to use.
 
-# Useage
+# Usage
 When first opening the app you should see prompts to allow permissions, tap accept for both.
 
 .
