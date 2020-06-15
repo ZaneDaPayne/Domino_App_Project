@@ -24,6 +24,7 @@ GridLayout:
 			pos_hint: {'center_x':0.5,'top':1}
 			size_hint: 1.5,1.5
 			source: "startscreen.png"
+			allow_stretch: True
 
 		Label:
 			pos_hint: {'center_x':0.5,'top':1}
@@ -201,10 +202,25 @@ GridLayout:
 			    		center_x: self.parent.center_x
 			    		center_y: self.parent.center_y
 			    		size: self.parent.size 
-			    		allow_stretch: False
+			    		allow_stretch: False				
 
-
-				    
+			FloatLayout:
+				#These might be comically small on mobile
+				MDIconButton:
+					pos_hint: {"top":1, "center_x":0.5}
+					icon: "plus-circle-outline"
+					opposite_colors: True
+					on_release: root.add_dot()
+				MDIconButton:
+					pos_hint: {"bottom":0.75, "center_x":0.5}
+					icon: "minus-circle-outline"
+					opposite_colors: True
+					on_release: root.minus_dot()
+				Label:
+					id: dot_count
+					pos_hint: {"center_x":0.5, "center_y":0.5}
+					text: "DOTS +0"
+					text_color: (1,1,1,1)   
 
 			FloatLayout:
 				#These might be comically small on mobile
@@ -223,29 +239,6 @@ GridLayout:
 					pos_hint: {"center_x":0.5, "center_y":0.5}
 					text: "BLANKS +0"
 					text_color: (1,1,1,1)
-				
-
-			FloatLayout:
-				#These might be comically small on mobile
-				MDIconButton:
-					pos_hint: {"top":1, "center_x":0.5}
-					icon: "plus-circle-outline"
-					opposite_colors: True
-					on_release: root.add_dot()
-				MDIconButton:
-					pos_hint: {"bottom":0.75, "center_x":0.5}
-					icon: "minus-circle-outline"
-					opposite_colors: True
-					on_release: root.minus_dot()
-				Label:
-					id: dot_count
-					pos_hint: {"center_x":0.5, "center_y":0.5}
-					text: "DOTS +0"
-					text_color: (1,1,1,1)
-				
-		
-			
-
 
 
 	

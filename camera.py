@@ -25,9 +25,6 @@ class Screenmanager(ScreenManager):
     pass
 
 class StartScreen(Screen):
-    pass   
-    
-class MainWindow(Screen):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self._request_android_permissions()
@@ -42,14 +39,17 @@ class MainWindow(Screen):
             return
         from android.permissions import request_permissions, Permission
         request_permissions([Permission.CAMERA,Permission.WRITE_EXTERNAL_STORAGE,
-                            Permission.READ_EXTERNAL_STORAGE])
+                            Permission.READ_EXTERNAL_STORAGE])   
+    
+class MainWindow(Screen):
+    
           
     def create_cam(self):
         app = MDApp.get_running_app()
         if 'cam' in app.dynamic_ids:
             return
         cam = XCamera(index=0,play=True)
-        print("\n\n",self.ids,"\n\n")
+        print("Camera Created")
         self.ids.camwindow.add_widget(cam)
         app.dynamic_ids['cam'] = cam
         
@@ -72,6 +72,7 @@ class OverlayWindow(Screen):
         self.im = None
         self.dot_template = None
         self.blank_template = None
+        self.imgdirectory = './'
         super(OverlayWindow, self).__init__(**kwargs)
     
     
@@ -113,9 +114,9 @@ class OverlayWindow(Screen):
     def reset(self):
         print("reset")
         try:
-            os.remove("IMG_domino.jpg")
+            os.remove(os.path.join(self.imgdirectory,"IMG_domino.jpg"))
         except:
-            pass    
+            print("image not removed!")    
         try:
             app = MDApp.get_running_app()
             self.ids.checkwindow.remove_widget(app.dynamic_ids.plot) # remove the plot
@@ -128,7 +129,10 @@ class OverlayWindow(Screen):
         
     def createimg(self):
         print("createimg")
-        self.im = cv2.imread("IMG_domino.jpg")
+        if platform=='android':
+            from android import storage
+            self.imgdirectory = storage.primary_external_storage_path()
+        self.im = cv2.imread(os.path.join(self.imgdirectory,"IMG_domino.jpg"))
         fig = plt.figure(figsize=(20,20))
         ax = fig.add_axes((0,0,1,1))
         ax.axis("off")
