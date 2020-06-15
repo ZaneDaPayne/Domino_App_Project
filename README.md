@@ -43,7 +43,7 @@ To learn more about image processing tools, see the [SciKit-Image Documentation]
 # Installation
 We finally have a functioning app available for download. This is still full of bugs and lacking in features, but it functions with careful use.
 
-**NOTE:** You *must* hold the shutter button until you hear the shutter sound (about 1 sec) or the app will crash. It will take about 2 seconds to then change screens and show the score.
+**NOTE:** You *must* hold the shutter button until you hear the shutter sound (about 1 sec) or the app will crash. Then after you let go it will take about 2 seconds to change screens and show the score.
 
 To install the apk:
 1. Download the apk file to your android phone
