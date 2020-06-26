@@ -8,7 +8,6 @@
 
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen, ScreenManager
-#from kivy.uix.image import Image
 import os
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 import matplotlib.pyplot as plt
@@ -17,6 +16,7 @@ from kivy.utils import platform
 from xcamera import XCamera
 import cv2
 import numpy as np
+import time
 
 class MyCamera(XCamera):
     pass
@@ -33,22 +33,30 @@ class StartScreen(Screen):
         return platform == 'android'
     def _request_android_permissions(self):
         """
-        Requests CAMERA, and read/write permission on Android.
+        Requests CAMERA permission on Android.
         """
         if not self.is_android():
             return
         from android.permissions import request_permissions, Permission
-        request_permissions([Permission.CAMERA,Permission.WRITE_EXTERNAL_STORAGE,
-                            Permission.READ_EXTERNAL_STORAGE])   
+        request_permissions([Permission.CAMERA]) #,Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE
     
 class MainWindow(Screen):
-    
-          
+    def capture(self):
+        app = MDApp.get_running_app()
+        cam = app.dynamic_ids.cam
+        x,y = cam.x,cam.y
+        width,height = cam.resolution[0],cam.resolution[1]
+        data = cam.texture.get_region(0,0,width,height).pixels #this is a byte string of type ubyte   
+        im_arr = np.frombuffer(data, np.uint8).reshape((height,width,4)) #because rgba
+
+        app.dynamic_ids['im'] = im_arr
+        
     def create_cam(self):
         app = MDApp.get_running_app()
         if 'cam' in app.dynamic_ids:
             return
         cam = XCamera(index=0,play=True)
+        print(cam.resolution)
         print("Camera Created")
         self.ids.camwindow.add_widget(cam)
         app.dynamic_ids['cam'] = cam
@@ -112,11 +120,7 @@ class OverlayWindow(Screen):
         print(self.ids.score_label.text)
         
     def reset(self):
-        print("reset")
-        try:
-            os.remove(os.path.join(self.imgdirectory,"IMG_domino.jpg"))
-        except:
-            print("image not removed!")    
+        print("reset")   
         try:
             app = MDApp.get_running_app()
             self.ids.checkwindow.remove_widget(app.dynamic_ids.plot) # remove the plot
@@ -129,20 +133,24 @@ class OverlayWindow(Screen):
         
     def createimg(self):
         print("createimg")
-        if platform=='android':
-            from android import storage
-            self.imgdirectory = storage.primary_external_storage_path()
-        self.im = cv2.imread(os.path.join(self.imgdirectory,"IMG_domino.jpg"))
+        app = MDApp.get_running_app()
+        
+        # if platform=='android':
+        #     from android import storage
+        #     self.imgdirectory = storage.primary_external_storage_path()
+        # self.im = cv2.imread(os.path.join(self.imgdirectory,"IMG_domino.jpg"))
         fig = plt.figure(figsize=(20,20))
         ax = fig.add_axes((0,0,1,1))
         ax.axis("off")
         
         from matplotlib.patches import Rectangle,Circle
         
-        b,g,r = cv2.split(self.im)#convert to rgb
+        im = app.dynamic_ids.im
+        
+        r,g,b,a = cv2.split(im)#convert to rgb
         im_c = cv2.merge([r,g,b])
         ax.imshow(im_c) # show color image
-        im = cv2.cvtColor(self.im,cv2.COLOR_BGR2GRAY)
+        im = cv2.cvtColor(im,cv2.COLOR_RGBA2GRAY)
         
         min_size = min(im.shape)*0.01
         max_size = min(im.shape)*0.1
@@ -161,7 +169,7 @@ class OverlayWindow(Screen):
         
         for dot in dots:
             xy, radius = dot
-            circ = Circle(xy,radius,fc='none',ec='yellow',lw=2)
+            circ = Circle(xy,radius,fc='none',ec='yellow',lw=2.5)
             ax.add_patch(circ,)
             
         self.num_dots = len(dots)

@@ -26,16 +26,18 @@ GridLayout:
 			source: "startscreen.png"
 			allow_stretch: True
 
+		#ScaleLabel:
 		Label:
-			pos_hint: {'center_x':0.5,'top':1}
-			markup: True
-			text: "[size=26]Domino App[/size]"
-
-
+			pos_hint: {'center_x':0.5,'center_y':0.6}
+			size_hint: 0.7,None
+			text: "Domino App"
+			font_size: "50sp"
 		Button:
 			pos_hint: {'center_x':0.5, 'center_y':0.1}
-			size_hint: 0.2,0.1
+			size_hint: 0.25,0.1
 			text: "Start"
+			font_size: "20sp"
+
 			on_press:
 				app.root.ids.main.create_cam()
 			on_release:
@@ -104,7 +106,8 @@ GridLayout:
 			    	background_color: 0,0,0,0
 			    	
 			    	on_press: 
-			    		app.dynamic_ids.cam.shoot() #takes picture and saves
+			    		root.capture()
+			    		#app.dynamic_ids.cam.shoot() #takes picture and saves
 			    	on_release: 
 			    		app.root.ids.overlay.createimg()
 			    		app.root.ids['screenmanager'].transition.direction = 'left'
