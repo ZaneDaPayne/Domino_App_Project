@@ -47,3 +47,17 @@ To fix, open the file explorer and press Ctrl+H to show hidden folders. Delete t
 Here is an example of of how the app looks on Windows:
 
 <img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/detection.PNG" alt="The dots are detected" width="300"/>
+
+# To Do
+- [ ] Fix camera orientation
+- [ ] Make start screen text resizable
+- [ ] Better looking start button
+- [ ] Add settings screen (maybe kivymd has something for this)
+    - Color of dots
+    - Value of blanks
+    - Which camera to use
+- [ ] Skimage recipe
+- [ ] Splash screen logo
+- [ ] App icon
+- [ ] Make incrementing icons resizable
+- [ ] Make detected dots easier to see/more noticable
