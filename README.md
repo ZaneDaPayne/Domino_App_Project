@@ -50,7 +50,8 @@ Here is an example of of how the app looks on Windows:
 
 # To Do
 - [ ] Fix camera orientation
-- [ ] Make start screen text resizable
+- [ ] Fix camera resolution to be highest possible
+- [x] Make start screen text resizable
 - [ ] Better looking start button
 - [ ] Add settings screen (maybe kivymd has something for this)
     - Color of dots
@@ -59,5 +60,5 @@ Here is an example of of how the app looks on Windows:
 - [ ] Skimage recipe
 - [ ] Splash screen logo
 - [ ] App icon
-- [ ] Make incrementing icons resizable
+- [ ] Make incrementing icons resizable (maybe)
 - [ ] Make detected dots easier to see/more noticable
