@@ -5,7 +5,7 @@ This branch is the development of the app using Xcode/Swift. The readme + build 
 # Setup
 The installation for Xcode/Swift is fairly straightforward. It can be run on any Unix/Linux os. If you are a macOS user, Xcode is an application that can be installed directly from the app store. Swift Toolchains and compilers can be installed as provided below. 
 
-1. Download the latest [Swift] (https://swift.org/download/#releases) package release.
+1. Download the latest [Swift](https://swift.org/download/#releases) package release.
 
 2. Run the package installer, which will install an Xcode toolchain into /Library/Developer/Toolchains/.
 
