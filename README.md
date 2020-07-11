@@ -41,7 +41,7 @@ The app build is still in progress. Some buttons currently lack functionalities 
 Here is an example of the layout so far:
 
 
-<img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/ios.png" alt="The dots are detected" width="300"/>
+<img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/ios.png" alt="The dots are detected" width="500"/>
 
 # Things to be Fixed or Added
 - [ ] Fix camera switching
