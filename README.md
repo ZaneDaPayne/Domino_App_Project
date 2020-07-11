@@ -39,6 +39,8 @@ Features/buttons can be modified in the SceneDelegate.swift file. UISceneSession
 The app build is still in progress. Some buttons currently lack functionalities or are connecting to incorrect functionalities and front camera switching currently does not work. This section will be updated with progress.
 
 Here is an example of the layout so far:
+
+
 <img src="https://github.com/ZaneDaPayne/Domino_App_Project/blob/Images/ios.png" alt="The dots are detected" width="300"/>
 
 # Things to be Fixed or Added
