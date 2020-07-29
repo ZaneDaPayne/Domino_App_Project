@@ -32,10 +32,13 @@ Additional Dependencies:
 
 The code can be compiled by cloning the repository. Otherwise, downloading and opening the "Domino App" folder on this branch will work as well. Compilation step will be updated with progress.
 
-**Feature Modifications** 
+
+# Feature Modifications
 Features/buttons can be modified in the SceneDelegate.swift file. UISceneSessions and UIWindowSessions have to be linked and modified within each function and later connected in the main storyboard page. To test/run and one of the screens, navigate to the Main.storyboard page and click on the "View Controller" tab at top. Press 'run' using the simulator.
 
-**Build Status**
+
+# Build Status
+
 The app build is still in progress. Some buttons currently lack functionalities or are connecting to incorrect functionalities and front camera switching currently does not work. This section will be updated with progress.
 
 Here is an example of the layout so far:
@@ -45,14 +48,14 @@ Here is an example of the layout so far:
 
 # Things to be Fixed or Added
 - [ ] Fix camera switching
-- [ ] Back button on View Controller 3 does not connect back to View Controller 1. Similarily, switching between dark and white mode does not change View Controller 1
-- [ ] UIIImageView in View Controller 3 needs to read image from captured image on View Controller 2.
+- [x ] Back button on View Controller 3 does not connect back to View Controller 1. Similarily, switching between dark and white mode does not change View Controller 1
+- [x ] UIIImageView in View Controller 3 needs to read image from captured image on View Controller 2.
 - [ ] Backgrounds for Screen 2 and 3???
 - [ ] Possibly score setting options
 - [ ] Scoring options need to connect with increase and decrease in scores
-- [ ] Determine app icon
+- [x ] Determine app icon
 - [ ] Test run on all devices and make ImageViewer is dynamic
-- [ ] Captured image should fit onto ImageViewer. Aspect fit image.
+- [x ] Captured image should fit onto ImageViewer. Aspect fit image.
 - [ ] Modifications to increase accuracy with detection code.
 
 # Documentation
